@@ -1559,7 +1559,7 @@ h1 {
   }
 
   .navbar-brand img {
-    max-height: 50px; /* Smaller logo for mobile */
+    max-height: 35px; /* Smaller logo for mobile */
   }
 
   .navbar-toggler {
