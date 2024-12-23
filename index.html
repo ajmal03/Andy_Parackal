@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ANDY PARACKAL</title>
+    <link rel="icon"  href="images/logo.svg">
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<!--     <link href="css/bootstrap-icons.css" rel="stylesheet"> -->
+    <link href="https://fonts.cdnfonts.com/css/neighbor" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="css/templatemo-festava-live.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> 
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create Chat Bubble
+    const chatBubble = document.createElement("div");
+    chatBubble.className = "chat-bubble";
+    chatBubble.innerHTML = `
+      <img src="images/chat.png" alt="Chat Icon" />
+    `;
+    document.body.appendChild(chatBubble);
+
+    // Create Chat Container
+    const chatContainer = document.createElement("div");
+    chatContainer.className = "chat-container";
+    chatContainer.style.display = "none"; // Ensure hidden initially
+
+   const welcomeMessage = encodeURIComponent("Hi there! 👋 Welcome to AI in Australia (AiiA) – your hub for all things AI and innovation! 🚀 I’m your AI assistant, here to help you explore, learn, and collaborate. If you have any questions or need assistance, just let me know. Let’s shape the future of AI together! 💡");
+   const systemMessage = encodeURIComponent("Hi! I’m AiiA AI, your friendly assistant for AI in Australia (AiiA). We’re dedicated to making artificial intelligence and machine learning simple, practical, and accessible for everyone—from businesses looking to grow with AI to individuals exploring its potential.We offer AI-integrated websites and marketing services to help businesses build fast, modern, and mobile-friendly websites powered by AI, enhancing customer engagement and boosting conversions. Our AI-enhanced marketing campaigns use personalized ads, predictive insights, and lead generation strategies to help brands grow effectively.For businesses and individuals, we provide AI tools to automate tasks, analyze data, and optimize workflows, improving overall efficiency. Additionally, our workshops and seminars offer a chance to learn how to integrate AI into daily life or business operations, with regular events featuring industry experts to keep you ahead in the tech world.Dive into our library of cutting-edge research papers on AI and machine learning, perfect for professionals, students, and curious minds. You can also explore expert articles and community contributions, including insights, tutorials, and inspiring stories from industry professionals and our vibrant community. Stay informed with our monthly newsletters, delivering the latest AI trends, news, and tips straight to your inbox.We also specialize in customized AI solutions, tailoring advanced technologies to meet your specific needs, and provide AI consulting and training to unlock the full potential of AI in your operations. Finally, our networking opportunities connect you with other professionals, tech enthusiasts, and AI pioneers through events and dedicated platforms. I'm built using advanced AI technology to help you out.Let me know which of these services interests you, and I’ll guide you through it! If you’d like to get in touch directly, use our contact form at https://aiinaustralia.com or email us at info@aiinaustralia.com.au. What can I help you explore today?");
+
+    chatContainer.innerHTML = `
+      <div class="chat-header">
+        <span>Andy</span>
+        <span class="close-button" style="cursor: pointer;">&times;</span>
+      </div>
+      <iframe 
+        src="https://main.dn1a0s4d5ozpp.amplifyapp.com/?welcomeMessage=${welcomeMessage}&systemMessage=${systemMessage}"  
+        title="Chat UI" 
+        style="width: 100%; height: 90%; border: none;">
+      </iframe>
+    `;
+    document.body.appendChild(chatContainer);
+
+    // Event Listeners
+    const closeButton = chatContainer.querySelector(".close-button");
+
+    // Show/Hide Chat Container
+    chatBubble.addEventListener("click", function () {
+      chatContainer.style.display =
+        chatContainer.style.display === "none" || !chatContainer.style.display
+          ? "block"
+          : "none";
+    });
+
+    // Close Chat Container
+    closeButton.addEventListener("click", function () {
+      chatContainer.style.display = "none";
+    });
+  });
+</script>
+
+
+</head>
+
+<body>
+
+    <main>
+
+        <header class="site-header">
+            <div class="container">
+<!--                 <div class="row">
+
+                    <div class="col-lg-12 col-12 d-flex flex-wrap">
+                        <p class="d-flex me-4 mb-0">
+                            <strong class="text-dark">Welcome to <a style="font-family: Neighbor;">AiiA</a></strong>
+                        </p>
+                    </div>
+
+                </div> -->
+                  <nav class="navbar navbar-expand-lg">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a class="navbar-brand" href="./">
+                    <img src="images/logo.svg" alt="Ai In Australia" 
+                           max-width: 70px;
+                        height="60px";>
+                </a>
+
+                <!-- <a href="ticket.html" class="btn custom-btn d-lg-none ms-auto me-4">Buy Ticket</a> -->
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#About">About</a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_3">Events</a>
+                        </li> -->
+<!--                         <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_3">Research Papers</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#Sections">Sections</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#Services">Services</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#Articles">Articles</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#portfolio">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#team">Team</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#Contact">Contact</a>
+                        </li>
+                    </ul>
+
+                    <!-- <a href="ticket.html" class="btn custom-btn d-lg-block d-none">Buy Ticket</a> -->
+                </div>
+            </div>
+        </nav>
+            </div>
+        </header>
+
+
+      
+
+
+        <section class="hero-section" id="Home">
+            <div class="section-overlay"></div>
+
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="row">
+
+                    <div class="col-12 mt-auto mb-5 text-center">
+                       <!--  <small>AiiA Presents</small>
+                        <br> -->
+
+                        <h1 class="text-white " style="font-family: Montserrat; font-weight:ExtraBold;">ANDY PARACKAL</h1>
+                         <p style="font-weight: bolder; color:#EE5007;">I'm <span  style="font-weight: normal; color:#fff;" class="typed" data-typed-items="AI Consultent,Leading Australia Premium AI Solution Provider">AI Consultent</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+
+                        <a class="btn custom-btn smoothscroll" href="#About">Let's begin</a>
+                    </div>
+
+                    <div class="col-lg-12 col-12 mt-auto flex-column flex-lg-row text-center">
+
+
+                        <div class="social-share">
+                            <ul class="social-icon d-flex align-items-center justify-content-center">
+
+
+                                <li class="social-icon-item">
+                                    <a href="https://www.facebook.com/andyparackalyeto?mibextid=ZbWKwL" class="social-icon-link">
+                                        <span class="bi-facebook"></span>
+                                    </a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="https://x.com/aiinaustralia?s=21" class="social-icon-link">
+                                        <span class="bi bi-twitter-x"></span>
+                                    </a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="https://www.instagram.com/ai_in_australia?igsh=MXN1YnhsZGU1cTZ3" class="social-icon-link">
+                                        <span class="bi-instagram"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         <!--     <div class="container" data-aos="zoom-out">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+            <h2>Andy Parackal</h2>
+            <p>I'm <span class="typed" data-typed-items="AI Consultent,Leading Australia Premium AI Solution Provider">AI Consultent</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+            <div class="social-links">
+              <a href="#"><i class="bi bi-twitter-x"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+            <div class="video-wrap">
+                <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                    <source src="video/Ai-vdo.mp4" type="video/mp4">
+
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+
+        <section class="about-section section-padding" id="About">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
+                        <div class="services-info">
+                            <h2 class="text-white mb-4">About </h2>
+
+                            <p class="text-white">I’m Andy Parackal—an entrepreneur, tech visionary, and creator passionate about building transformative AI solutions and fostering meaningful conversations about the future of technology. My work spans everything from leading a team of talented developers to hosting podcasts, writing articles, and organizing Twitter Spaces that spark innovation and inspire change.
+
+                            </p>
+                            <p class="text-white"><span style="font-weight: bold;">Together with my team, we specialize in</span> <br>
+    •   Building Custom AI Tools & Applications: Designed to solve real-world problems and unlock new possibilities for businesses.<br>
+    •   Tech & Marketing Solutions: Combining AI and creativity to help brands grow and thrive in the digital space.<br>
+    •   Educational & Strategic Guidance: Empowering businesses and individuals to embrace AI confidently.</p>
+
+                           <a class="btn custom-btn smoothscroll" href="./About">view more <span style=" color: #fff;"> &rarr;</span></a>
+
+                
+                        </div> 
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="about-text-wrap">
+                            <img src="images/36d16a8bc9597f727d31bf16b3d6872c.jpg" class="about-image img-fluid">
+
+<!--                             <div class="about-text-info d-flex">
+                                <div class="d-flex">
+                                    <i class="about-text-icon bi-person"></i>
+                                </div>
+
+
+                                <div class="ms-4">
+                                    <h3>AiiA</h3>
+
+                                    <p class="mb-0">your amazing experience with us</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="artists-section section-padding" id="Sections">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <h2 class="mb-4" style="color: #000;">Explore Our Sections</h1>
+                    </div>
+                    <div class="col-lg-5 col-12">
+                        <div class="artists-thumb">
+                            <div class="artists-image-wrap">
+                                <img src="images/Event.jpg"
+                                    class="artists-image img-fluid">
+                            </div>
+                            <div class="artists-hover">
+                                <p>
+                                <strong>Events</strong>  
+                                </p>
+                                <p>
+                                 Stay updated with upcoming workshops, seminars, and conferences that bring AI knowledge and skills closer to you.
+                                 <br>
+                                     <a class="btn custom-btn smoothscroll" href="./Events">view more <span style=" color: #fff;"> &rarr;</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-5 col-12">
+                        <div class="artists-thumb">
+                            <div class="artists-image-wrap">
+                                <img src="images/Research.jpg"
+                                    class="artists-image img-fluid">
+                            </div>
+                            <div class="artists-hover">
+                                <p>
+                                    <strong>Research Papers</strong>
+                                </p>
+                                <p>
+                                     Dive into our rich repository of papers where academics and practitioners share their latest findings and innovations.
+                                     <br>
+                                     <a class="btn custom-btn smoothscroll" href="./Research">view more <span style=" color: #fff;"> &rarr;</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-5 col-12">
+                        <div class="artists-thumb">
+                            <div class="artists-image-wrap">
+                                <img src="images/Article.jpg"
+                                class="artists-image img-fluid">
+                            </div>
+                            <div class="artists-hover">
+                                <p>
+                                <strong>Articles</strong>
+                                </p>
+                                <p>
+                                    Read contributions from experts and community members alike, and submit your own articles for publication after our review.
+                                    <br>
+                                     <a class="btn custom-btn smoothscroll" href="./Articles">view more <span style=" color: #fff;"> &rarr;</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-5 col-12">
+                        <div class="artists-thumb">
+                            <div class="artists-image-wrap">
+                                <img src="images/IMG-20241123-WA0004.jpg"
+                                    class="artists-image img-fluid">
+                            </div>
+
+                            <div class="artists-hover">
+                                <p>
+                                <strong>Services</strong> 
+                                </p>
+                                <p>
+                                
+                                   We provide services to unlock the potential of AI, machine learning, and modern technologies.
+                                <br>
+                                <a class="btn custom-btn smoothscroll" href="./Services">view more <span style=" color: #fff;"> &rarr;</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+         <section class="about-section section-padding" id="Services">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
+                        <div class="services-info">
+                            <h2 class="text-white mb-4">Services</h2>
+
+                            <p class="text-white">We offer a comprehensive range of services to help you unlock the potential of artificial intelligence, machine learning, and modern technologies. 
+                            </p>
+                            <!-- <p class="text-white">Explore our events, research papers, insightful articles, and monthly Servicess designed to keep you informed and empowered with the latest in AI technology.</p> -->
+
+                           <a class="btn custom-btn smoothscroll" href="./Services"> Explore what we can do for you <span style=" color: #fff;"> &rarr;</span></a>
+
+                
+                        </div> 
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="about-text-wrap">
+                            <img src="images/IMG-20241123-WA0004.jpg" class="about-image img-fluid">
+
+<!--                             <div class="about-text-info d-flex">
+                                <div class="d-flex">
+                                    <i class="about-text-icon bi-person"></i>
+                                </div>
+
+
+                                <div class="ms-4">
+                                    <h3>AiiA</h3>
+
+                                    <p class="mb-0">your amazing experience with us</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="portfolio" class="portfolio section">
+  <div class="container">
+    <!-- Section Title -->
+    <div class="section-title" data-aos="fade-up">
+      <h2 style="color: #000;"> Portfolio</h2>
+      <p>Explore our projects</p>
+
+    </div>
+
+    <!-- Controls for Filters and View Modes -->
+    <div class="portfolio-controls d-flex justify-content-between align-items-center" data-aos="fade-up">
+      <!-- View Modes -->
+     <!--  <div>
+        <button class="btn btn-sm btn-outline-primary view-toggle" data-view="grid">Grid View</button>
+        <button class="btn btn-sm btn-outline-primary view-toggle" data-view="list">List View</button>
+      </div> -->
+      <!-- Filters -->
+      <ul class="portfolio-filters list-inline mb-0">
+        <li class="list-inline-item filter-active" data-filter="*">All</li>
+            <li class="list-inline-item" data-filter=".filter-app">Apps</li>
+           <li class="list-inline-item " data-filter=".filter-web">Websites</li>
+           <li class="list-inline-item" data-filter=".filter-nft">NFT</li>
+<!--         <li class="list-inline-item" data-filter=".filter-design">Designs</li> -->
+      </ul>
+    </div>
+    <br>
+
+    <!-- Portfolio Items -->
+    <div class="row portfolio-container grid-view" data-aos="fade-up" data-aos-delay="200">
+      <!-- Example Portfolio Items -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <img src="images/Screenshot (296).png" class="img-fluid" alt="App Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">App</h5>
+          <p>Rentop: Bike & Car Rentals <a href="https://apps.apple.com/in/app/rentop-bike-car-rentals/id1661307350" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <img src="images/Screenshot (299).png" class="img-fluid" alt="App Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">App</h5>
+          <p>chatboo<a href="https://chatboo.app/" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <img src="images/Screenshot (293).png" class="img-fluid" alt="Web Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">Web</h5>
+          <p>healthiq <a href="https://healthiq.plus/" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <img src="images/Screenshot (295).png" class="img-fluid" alt="Web Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">Web</h5>
+          <p>tweetfox <a href="https://assignmentgpt.ai/" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <img src="images/Screenshot (294).png" class="img-fluid" alt="Web Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">Web</h5>
+          <p>assignmentgpt <a href="https://assignmentgpt.ai/" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+        <div class="col-lg-4 col-md-6 portfolio-item filter-nft">
+        <img src="images/Screenshot (302).png" class="img-fluid" alt="Web Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">NFT</h5>
+          <p>garn<a href="https://garn.me/" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+        <div class="col-lg-4 col-md-6 portfolio-item filter-nft">
+        <img src="images/Screenshot (304).png" class="img-fluid" alt="Web Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">NFT</h5>
+          <p>mudmavericks<a href="https://mudmavericks.io/" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+<!--       <div class="col-lg-4 col-md-6 portfolio-item filter-design">
+        <img src="images/5135178_2691902.jpg" class="img-fluid" alt="Design Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">Design</h5>
+          <p>Creative branding solutions <a href="#" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-design">
+        <img src="images/4220497_2248604.jpg" class="img-fluid" alt="Design Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">Design</h5>
+          <p>Creative branding solutions <a href="#" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-design">
+        <img src="images/17806780_5817154.jpg" class="img-fluid" alt="Design Project 1">
+        <div class="portfolio-info">
+          <h5 style="color:white;">Design</h5>
+          <p>Creative branding solutions <a href="#" title="More Details" class="preview-link"><i class="bi bi-link-45deg"></i></a></p>
+        </div>
+      </div> -->
+      <!-- Add more items as needed -->
+    </div>
+ <a class="btn custom-btn smoothscroll" href="./Portfolio"> Explore More<span style=" color: #fff;"> &rarr;</span></a>
+  </div>
+</section>
+
+
+
+        <section class="schedule-section section-padding" id="Articles">
+                        <div class="container">
+                            <div class="row">
+                <div class="col-12 text-center">
+                                            <h2 class="text-white mb-4"><a href="./Articles" style="color: #fff;">Articles</a></h2>
+                </div>
+            
+                                
+            <section class="section posts-entry posts-entry-sm bg-light">
+            <div class="container">
+                
+              <div class="row">
+                <div class="col-md-6 col-lg-3">
+                  <div class="blog-entry">
+                    <a href="https://x.com/Andyparackal/status/1787660091673768126" class="img-link">
+                      <img src="images/GM8K0QFbkAAFPwA.jpeg" alt="Image" class="img-fluid">
+                    </a>
+                    <span class="date">Apr. 14th, 2024</span>
+                    <h2><a href="https://x.com/Andyparackal/status/1787660091673768126">Exploring Extropic AI Vision: Thermodynamic Computing for AI Transformation"</a></h2>
+                    <p>As AI continues to evolve, companies are seeking novel approaches to enhance computing power and efficiency. Among these, Extropic claims a significant innovation with its "thermodynamic computing" techn...</p>
+                    <p><a  style="color: #fff"; href="https://x.com/Andyparackal/status/1787660091673768126" class="read-more">Continue Reading</a></p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <div class="blog-entry">
+                    <a href="https://x.com/Andyparackal/status/1778297921378910503" class="img-link">
+                      <img src="images/GK3HLyda0AA9NaK.jpeg" alt="Image" class="img-fluid">
+                    </a>
+                    <span class="date">Apr. 14th, 2024</span>
+                    <h2><a href="https://x.com/Andyparackal/status/1778297921378910503">Illuminating the Path: My Journey with Yann LeCun's Visionary AI Legacy</a></h2>
+                    <p>In the realm of Artificial Intelligence (AI), where innovation meets imagination, the work of Yann LeCun stands as a testament to human ingenuity and foresight. My journey through the labyrinth of AI was illu...</p>
+                    <p><a  style="color: #fff"; href="https://x.com/Andyparackal/status/1778297921378910503" class="read-more">Continue Reading</a></p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <div class="blog-entry">
+                    <a href="https://x.com/Andyparackal/status/1774632457956200566" class="img-link">
+                      <img src="images/GKDCWcJbgAAoTV0.jpeg" alt="Image" class="img-fluid">
+                    </a>
+                    <span class="date">Apr. 14th, 2024</span>
+                    <h2><a href="https://x.com/Andyparackal/status/1774632457956200566">A Beginner's Guide to Understanding Artificial Intelligence Classifications</a></h2>
+                    <p>Artificial intelligence (AI) is a captivating field that holds the potential to transform our world. In this beginner's guide, we will embark on an exploration of the different types of AI, shedding light on ...</p>
+                    <p><a  style="color: #fff"; href="https://x.com/Andyparackal/status/1774632457956200566" class="read-more">Continue Reading</a></p>
+                  </div>
+                </div>
+                      <div class="col-md-6 col-lg-3">
+                  <div class="blog-entry">
+                    <a href="https://x.com/Andyparackal/status/1774632457956200566" class="img-link">
+                      <img src="images/GKDCWcJbgAAoTV0.jpeg" alt="Image" class="img-fluid">
+                    </a>
+                    <span class="date">Apr. 14th, 2024</span>
+                    <h2><a href="https://x.com/Andyparackal/status/1774632457956200566">A Beginner's Guide to Understanding Artificial Intelligence Classifications</a></h2>
+                    <p>Artificial intelligence (AI) is a captivating field that holds the potential to transform our world. In this beginner's guide, we will embark on an exploration of the different types of AI, shedding light on ...</p>
+                    <p><a  style="color: #fff"; href="https://x.com/Andyparackal/status/1774632457956200566" class="read-more">Continue Reading</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+                                        
+                            </div>
+                        </div>
+                    </section>
+            
+            
+        <section id="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2 style="color: #000;">What Our Clients Say</h2>
+        <p>We’ve partnered with industry leaders to deliver innovative AI solutions. Here’s what they have to say about us.</p>
+      </div>
+
+      <div class="swiper testimonial-slider">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="quote-icon">“</div>
+              <p class="testimonial-text">
+                   “Working with Andy Parackal and his company, AI in Australia, has been an absolute game-changer for TNC Group. Andy’s expertise in marketing, lead generation, and innovative software solutions has elevated our business to new heights. His ability to implement cutting-edge strategies and deliver measurable results has exceeded our expectations. Andy’s professionalism, creativity, and commitment to our success have made him an invaluable partner. I highly recommend AI in Australia for any business looking to transform its operations and achieve outstanding results.”
+            <br>
+
+            — Wade Davis, Founder, TNC Group
+            TNC Group Investment Property Specialist
+              </p>
+              <div class="testimonial-author">
+                <img src="images/media_20241124_212754_2701404659062371625.jpg" alt="Client 1">
+                <h4>Wade Davis</h4>
+                <p>Founder of TNC Group</p>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="quote-icon">“</div>
+              <p class="testimonial-text">
+                 "ChatBoo is a cutting-edge, cross-platform AI companion app that features real-time AI voice calling. As the founder, I’m proud to say that AI in Australia played a crucial role in the success of our product. Their team demonstrated technical brilliance, professionalism, and unwavering dedication throughout the development process.
+                <br>
+                One of the standout aspects of working with AI in Australia was their location—being based here in Australia was non-negotiable for us. Our customers’ data security is paramount, and we needed a trusted partner that shares our commitment to maintaining the highest standards.
+                "<br>
+                _ Adam Jones
+              </p>
+              <div class="testimonial-author">
+                <img src="images/espes.png"  alt="Client 2">
+                <h4>Adam Jones</h4>
+                <p>Founder of ChatBoo</p>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="quote-icon">“</div>
+              <p class="testimonial-text">
+                “Working with Andy Parackal and his company, AI in Australia, has been an absolute game-changer for TNC Group. Andy’s expertise in marketing, lead generation, and innovative software solutions has elevated our business to new heights. His ability to implement cutting-edge strategies and deliver measurable results has exceeded our expectations. Andy’s professionalism, creativity, and commitment to our success have made him an invaluable partner. I highly recommend AI in Australia for any business looking to transform its operations and achieve outstanding results.”
+            <br>
+
+            — Wade Davis, Founder, TNC Group
+            TNC Group Investment Property Specialist
+              </p>
+              <div class="testimonial-author">
+                <img src="images/media_20241124_212754_2701404659062371625.jpg" alt="Client 3">
+                <h4>Wade Davis</h4>
+                <p>Founder of TNC Group</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+<section id="team" class="team-section">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2 style="text-align: left; color: #fff;">Our Team</h2>
+        <p style="text-align: left; color: #fff;">Meet our talented professionals.</p>
+      </div>
+      <div class="row">
+        <!-- Team Member 1 -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="team-member">
+            <img src="images/Andy.jpg" alt="Team Member 1" class="img-fluid">
+            <div class="member-info">
+              <h4>Andy parackal </h4>
+              <span>CTO</span>
+              <!-- <p>John is an experienced leader with over 10 years in the AI industry.</p> -->
+              <div class="social">
+                <a href="https://x.com/Andyparackal?t=RB8kSOQz5fe9cfkGnZ8khA&s=09"><i class="bi bi-twitter-x" style="color:#ef6603;"></i></a>
+                <a href="https://www.facebook.com/andy.parackal.9"><i class="bi bi-facebook" style="color:#ef6603;"></i></a>
+                <a href="https://www.linkedin.com/in/andy-parackal-354b03120/"><i class="bi bi-linkedin" style="color:#ef6603;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="team-member">
+            <img src="images/Hayley.jpg" alt="Team Member 2" class="img-fluid">
+            <div class="member-info">
+              <h4>Hayley Floyd</h4>
+              <span>Account executive</span>
+              <!-- <p>Jane oversees our tech strategy and ensures cutting-edge innovations.</p> -->
+              <div class="social">
+<!--                 <a href="#"><i class="bi bi-twitter" style="color:#ef6603;"></i></a> -->
+                <a href=" https://www.instagram.com/haylsflo?igsh=enV6M2IwNTZmbWRw"><i class="bi bi-instagram" style="color:#ef6603;"></i></a>
+                <a href="https://www.linkedin.com/in/hayley-f-"><i class="bi bi-linkedin" style="color:#ef6603;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="team-member">
+            <img src="images/ImportedPhoto_1732519785228.jpg" alt="Team Member 3" class="img-fluid">
+            <div class="member-info">
+              <h4>Santhosh P</h4>
+              <span>Head of marketing</span>
+<!--               <p>Emma drives our marketing campaigns and brand outreach globally.</p> -->
+              <div class="social">
+<!--                 <a href="#"><i class="bi bi-twitter"></i></a> -->
+                <a href="#"><i class="bi bi-instagram" style="color:#ef6603;"></i></a>
+<!--                 <a href="#"><i class="bi bi-linkedin" style="color:#ef6603;"></i></a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+        <section class="contact-section section-padding" id="Contact">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8 col-12 mx-auto">
+                        <h2 class="text-center mb-4">Interested? Let's talk</h2>
+
+                        <nav class="d-flex justify-content-center">
+                            <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab"
+                                role="tablist">
+                                <button class="nav-link active" id="nav-ContactForm-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-ContactForm" type="button" role="tab"
+                                    aria-controls="nav-ContactForm" aria-selected="false">
+                                    <h5>Contact Form</h5>
+                                </button>
+
+                                <button class="nav-link" id="nav-ContactMap-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-ContactMap" type="button" role="tab"
+                                    aria-controls="nav-ContactMap" aria-selected="false">
+                                    <h5>Google Maps</h5>
+                                </button>
+                            </div>
+                        </nav>
+
+                        <div class="tab-content shadow-lg mt-5" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel"
+                                aria-labelledby="nav-ContactForm-tab">
+                                <form id="submit-form" class="custom-form contact-form mb-5 mb-lg-0" action="" >
+                                    <div class="contact-form-body">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <input type="text" name="entry.1527441591" id="contact-name"
+                                                    class="form-control" placeholder="Full name" required>
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <input type="email" name="entry.625349184" id="contact-email"
+                                                    pattern="[^ @]*@[^ @]*" class="form-control"
+                                                    placeholder="Email address" required>
+                                            </div>
+                                        </div>
+
+                                        <input type="text" name="entry.645894846" id="contact-company"
+                                            class="form-control" placeholder="Company" required>
+
+                                        <textarea name="entry.1100781090" rows="3" class="form-control"
+                                            id="contact-message" placeholder="Message"></textarea>
+
+                                        <div class="col-lg-4 col-md-10 col-8 mx-auto">
+                                            <button type="submit" class="form-control" value="submit" >Send message</button>
+<!--                                                 <button type="submit"  class="form-control" onClick="window.location.href='https://aiinaustralia.com/';">Send message</button> -->
+                                       </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-ContactMap" role="tabpanel"
+                                aria-labelledby="nav-ContactMap-tab">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3203.8723772332924!2d153.03429667513637!3d-27.456983716163997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9159f2c198b615%3A0xf67ad401480eb22b!2s757%20Ann%20St%2C%20Fortitude%20Valley%20QLD%204006%2C%20Australia!5e1!3m2!1sen!2sin!4v1732359753780!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <!-- You can easily copy the embed code from Google Maps -> Share -> Embed a map // -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="site-footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-12">
+                        <h2 class="text-white mb-lg-0" style="font-family: Montserrat;font-weight: Extrabold;">ANDY PARACKAL</h2>
+                    </div>
+
+                    <div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
+                        <ul class="social-icon d-flex justify-content-lg-end">
+                            <li class="social-icon-item">
+                                <a href="https://x.com/aiinaustralia?s=21" class="social-icon-link">
+                                    <span class="bi bi-twitter-x"></span>
+                                </a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="https://www.tiktok.com/@andyparackal_?_t=8lkNIDgroOY&_r=1" class="social-icon-link">
+                                    <span class="bi bi-tiktok"></span>
+                                </a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="https://www.instagram.com/ai_in_australia?igsh=MXN1YnhsZGU1cTZ3" class="social-icon-link">
+                                    <span class="bi-instagram"></span>
+                                </a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="https://youtube.com/@andyparackal7471?si=i4UANT6CYL9ID04M" class="social-icon-link">
+                                    <span class="bi-youtube"></span>
+                                </a>
+                            </li>
+
+                            <!-- <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-pinterest"></span>
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-12 mb-4 pb-2">
+                    <h5 class="site-footer-title mb-3">Links</h5>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="./" class="site-footer-link">Home</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#About" class="site-footer-link">About</a>
+                        </li>
+
+<!--                         <li class="site-footer-link-item">
+                            <a href="#section_3" class="site-footer-link">Events</a>
+                        </li> -->
+<!--                         <li class="site-footer-link-item">
+                            <a href="#section_3" class="site-footer-link">Research Papers</a>
+                        </li> -->
+                        <li class="site-footer-link-item">
+                            <a href="#Sections" class="site-footer-link">Sections</a>
+                        </li>
+                        <li class="site-footer-link-item">
+                            <a href="#Services" class="site-footer-link">Services</a>
+                        </li>
+
+                        
+
+
+
+                        <!-- <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Pricing</a>
+                        </li> -->
+
+                        <li class="site-footer-link-item">
+                            <a href="#Contact" class="site-footer-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                  <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                    <h5 class="site-footer-title mb-3">Have a question?</h5>
+
+<!--                     <p class="text-white d-flex mb-1">
+                        <a href="tel: +61499321549" class="site-footer-link">
+                            +61 499-321-549
+                        </a>
+                    </p> -->
+
+                    <p class="text-white d-flex">
+                        <a href="mailto:aiinaustralia.au@gmail.com" class="site-footer-link">
+                            info@andyparackal.com.au
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-11 mb-4 mb-lg-0 mb-md-0">
+                    <h5 class="site-footer-title mb-3">Location</h5>
+
+                    <!-- <p class="text-white d-flex mt-3 mb-2">
+                        Silang Junction South, Tagaytay, Cavite</p> -->
+
+                    <a class="link-fx-1 color-contrast-higher mt-3" href="#">
+                        <span>Our Maps</span>
+                        <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="16" cy="16" r="15.5"></circle>
+                                <line x1="10" y1="18" x2="16" y2="12"></line>
+                                <line x1="16" y1="12" x2="22" y2="18"></line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-footer-bottom">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-12 mt-5">
+                        <p class="copyright-text">© 2024, Andy Parackal | All rights reserved</p>
+                        <!-- <p class="copyright-text">Distributed by: <a href="https://www.linkedin.com/in/ajmal-n-a26500176/">Slash</a></p> -->
+                    </div>
+
+                    <div class="col-lg-8 col-12 mt-lg-5">
+                        <ul class="site-footer-links">
+                            <li class="site-footer-link-item">
+                                <a href="#" class="site-footer-link">Terms &amp; Conditions</a>
+                            </li>
+
+                            <li class="site-footer-link-item">
+                                <a href="#" class="site-footer-link">Privacy Policy</a>
+                            </li>
+
+                            <li class="site-footer-link-item">
+                                <a href="#" class="site-footer-link">Your Feedback</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!--  <script>
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://docs.google.com/forms/u/5/d/e/1FAIpQLSfwvpykhZC-cGAea6dkZH_bpL5vogA15JzS6llhXdKq9_eaSw/formResponse?pli=1",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
+    
+                }
+            })
+        })
+    </script> -->
+ 
+  
+ 
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            new Typed('.typed', {
+                strings: document.querySelector('.typed').getAttribute('data-typed-items').split(','),
+                typeSpeed: 100,
+                backSpeed: 50,
+                backDelay: 2000,
+                loop: true
+            });
+        });
+    </script>
+
+    
+  
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/click-scroll.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/portfolio.js"></script>
+    <script src="js/team.js"></script>
+    <script src="js/testimonial.js"></script>
+    <script src="js/form.js"></script>
+
+
+</body>
+
+</html>
