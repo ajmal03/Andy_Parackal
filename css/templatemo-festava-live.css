@@ -1438,7 +1438,7 @@ background-image: url('../images/aj_bg.png');
 }
 
 .social-icon-link {
-  background: var(--dark-color);
+  background-color:rgb(12 12 12 / 80%);
   border-radius: var(--border-radius-large);
   color: var(--white-color);
   font-size: var(--copyright-font-size);
