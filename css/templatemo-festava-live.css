@@ -1418,8 +1418,8 @@ background-image: url('../images/aj_bg.png');
 /*---------------------------------------
   SOCIAL ICON               
 -----------------------------------------*/
-.social-icon {
-    margin: 0;
+.social-icons{
+	 margin: 0;
     padding: 0;
     position: absolute;
     bottom: -34px;
@@ -1427,6 +1427,12 @@ background-image: url('../images/aj_bg.png');
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+
+.social-icon {
+    margin: 0;
+    padding: 0;
 }
 	
 }
