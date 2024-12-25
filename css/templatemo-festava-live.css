@@ -1419,8 +1419,16 @@ background-image: url('../images/aj_bg.png');
   SOCIAL ICON               
 -----------------------------------------*/
 .social-icon {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: -34px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+	
 }
 
 .social-icon-item {
