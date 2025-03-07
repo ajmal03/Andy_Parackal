@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blow Away Cyclone Alfred</title>
+    <link rel="icon"  href="images/logo.svg">
+    <style>
+        canvas {
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+            background: linear-gradient(to bottom, #87CEEB, #f0f0f0);
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        #blowBtn {
+            padding: 12px 24px;
+            font-size: clamp(16px, 4vw, 18px);
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: none;
+            width: 100%;
+            max-width: 300px;
+        }
+        #blowBtn:hover {
+            transform: scale(1.05);
+        }
+        #blowBtn:active {
+            transform: scale(0.95);
+        }
+        #restartBtn {
+            padding: 12px 24px;
+            font-size: clamp(16px, 4vw, 18px);
+            margin-top: 15px;
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: none;
+            width: 100%;
+            max-width: 300px;
+        }
+        #restartBtn:hover {
+            transform: scale(1.05);
+        }
+        #restartBtn:active {
+            transform: scale(0.95);
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            canvas {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <button id="blowBtn">Blow Away Alfred!</button>
+    <button id="restartBtn">Restart Game</button>
+
+    <script>
+        // Game setup
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const blowBtn = document.getElementById('blowBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        canvas.width = 800;
+        canvas.height = 600;
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const scale = Math.min(container.clientWidth / canvas.width, 1);
+            canvas.style.width = (canvas.width * scale) + 'px';
+            canvas.style.height = (canvas.height * scale) + 'px';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Game state
+        class Game {
+            constructor() {
+                this.cyclone = {
+                    x: 600,
+                    y: 300,
+                    radius: 40,
+                    speed: 1.5,
+                    rotation: 0
+                };
+                this.windStrength = 6;
+                this.score = 0;
+                this.highScore = localStorage.getItem('highScore') || 0;
+                this.gameOver = false;
+                this.particles = [];
+            }
+        }
+        const game = new Game();
+
+        // Audio handling
+        class AudioManager {
+            constructor() {
+                this.audioContext = null;
+                this.analyser = null;
+                this.dataArray = null;
+                this.isMicActive = false;
+            }
+
+            async init() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    const source = this.audioContext.createMediaStreamSource(stream);
+                    this.analyser = this.audioContext.createAnalyser();
+                    this.analyser.fftSize = 256;
+                    this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+                    source.connect(this.analyser);
+                    this.isMicActive = true;
+                    blowBtn.style.display = 'none';
+                    this.checkMicInput();
+                } catch (e) {
+                    console.log("Microphone error:", e);
+                    blowBtn.style.display = 'block';
+                }
+            }
+
+            checkMicInput() {
+                if (!game.gameOver && this.isMicActive) {
+                    this.analyser.getByteFrequencyData(this.dataArray);
+                    const volume = this.dataArray.reduce((a, b) => a + b) / this.dataArray.length;
+                    if (volume > 60) {
+                        game.cyclone.x += game.windStrength * (volume / 50);
+                        game.cyclone.x = Math.min(game.cyclone.x, canvas.width - game.cyclone.radius);
+                    }
+                }
+                requestAnimationFrame(() => this.checkMicInput());
+            }
+        }
+        const audio = new AudioManager();
+        audio.init();
+
+        // Particle system for wind effects
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = Math.random() * 3 + 1;
+                this.life = Math.random() * 30 + 20;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.life--;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Drawing functions
+        function drawBackground() {
+            // Sky (light blue)
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height * 0.5);
+
+            // Ocean (deeper blue with waves)
+            ctx.fillStyle = '#1E90FF';
+            ctx.fillRect(0, canvas.height * 0.5, canvas.width, canvas.height * 0.3);
+
+            // Draw animated waves on the ocean
+            for (let i = canvas.height * 0.5; i < canvas.height * 0.8; i += 10) {
+                ctx.beginPath();
+                const waveOffset = Math.sin(Date.now() * 0.003 + i * 0.1) * 15;
+                ctx.moveTo(0, i);
+                ctx.quadraticCurveTo(canvas.width / 2 + waveOffset, i - 5, canvas.width, i);
+                ctx.strokeStyle = `hsl(210, 80%, ${60 + Math.sin(i * 0.05) * 10}%)`;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+            }
+
+            // Beach (sandy color with texture)
+            ctx.fillStyle = '#F4A460';
+            ctx.fillRect(0, canvas.height * 0.8, canvas.width, canvas.height * 0.2);
+
+            // Add some texture to the beach (small speckles for sand)
+            for (let i = 0; i < 100; i++) {
+                ctx.fillStyle = `rgba(210, 180, 140, ${Math.random() * 0.5 + 0.3})`;
+                ctx.beginPath();
+                ctx.arc(
+                    Math.random() * canvas.width,
+                    canvas.height * 0.8 + Math.random() * (canvas.height * 0.2),
+                    Math.random() * 2,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+            }
+        }
+
+        function drawScene() {
+            // Trees
+            ctx.fillStyle = '#228B22';
+            for (let x = 50; x < canvas.width * 0.5; x += 100) {
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height * 0.9);
+                ctx.lineTo(x - 30, canvas.height * 0.75);
+                ctx.lineTo(x + 30, canvas.height * 0.75);
+                ctx.fill();
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(x - 8, canvas.height * 0.75, 16, canvas.height * 0.15);
+                ctx.fillStyle = '#228B22';
+            }
+
+            // City skyline
+            ctx.fillStyle = '#666';
+            for (let x = 0; x < canvas.width * 0.5; x += 60) {
+                const height = Math.random() * 120 + 80;
+                ctx.fillRect(x, canvas.height * 0.5 - height, 40, height);
+            }
+        }
+
+        function drawPeople() {
+            for (let x = 100; x < canvas.width * 0.5; x += 100) {
+                // Tall body
+                ctx.fillStyle = 'white';
+                ctx.fillRect(x, canvas.height * 0.85 - 80, 20, 80);
+
+                // Head (red circle)
+                ctx.fillStyle = 'red';
+                ctx.beginPath();
+                ctx.arc(x + 10, canvas.height * 0.85 - 90, 10, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Shirt (blue)
+                ctx.fillStyle = 'blue';
+                ctx.fillRect(x, canvas.height * 0.85 - 80, 20, 30);
+
+                // Shorts (green)
+                ctx.fillStyle = 'green';
+                ctx.fillRect(x, canvas.height * 0.85 - 50, 20, 20);
+
+                // Legs (black)
+                ctx.fillStyle = 'black';
+                ctx.fillRect(x + 5, canvas.height * 0.85 - 30, 5, 30);
+                ctx.fillRect(x + 10, canvas.height * 0.85 - 30, 5, 30);
+            }
+        }
+
+        function drawCyclone() {
+            // Simple red circle for the cyclone
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(game.cyclone.x, game.cyclone.y, game.cyclone.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Add the name "Alfred" inside the cyclone
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.fillText('Alfred', game.cyclone.x, game.cyclone.y + 5);
+        }
+
+        function drawUI() {
+            const fontSize = Math.min(24, canvas.width / 25);
+            ctx.font = `${fontSize}px Arial`;
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'left';
+            ctx.fillText(`Score: ${game.score}`, 20, 40);
+            ctx.fillText(`High Score: ${game.highScore}`, 20, 70);
+
+            if (game.gameOver) {
+                const messageFontSize = Math.min(36, canvas.width / 15);
+                ctx.font = `${messageFontSize}px Arial`;
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+                ctx.textAlign = 'center';
+                const message = game.cyclone.x <= game.cyclone.radius 
+                    ? 'Alfred Hit Shore! Game Over!' 
+                    : 'Alfred Defeated! You Win!';
+                ctx.fillText(message, canvas.width / 2, canvas.height / 2);
+                restartBtn.style.display = 'block';
+            } else {
+                restartBtn.style.display = 'none';
+            }
+        }
+
+        // Game logic
+        function update() {
+            if (!game.gameOver) {
+                game.cyclone.x -= game.cyclone.speed;
+                game.score += 1;
+                
+                if (game.cyclone.x <= game.cyclone.radius || 
+                    game.cyclone.x >= canvas.width - game.cyclone.radius) {
+                    game.gameOver = true;
+                    game.highScore = Math.max(game.score, game.highScore);
+                    localStorage.setItem('highScore', game.highScore);
+                }
+            }
+
+            // Update particles
+            game.particles = game.particles.filter(p => p.life > 0);
+            game.particles.forEach(p => p.update());
+        }
+
+        // Controls
+        blowBtn.addEventListener('click', () => {
+            if (!game.gameOver) {
+                game.cyclone.x += game.windStrength * 2;
+                game.cyclone.x = Math.min(game.cyclone.x, canvas.width - game.cyclone.radius);
+                game.particles.push(new Particle(canvas.width * 0.5, canvas.height * 0.6));
+            }
+        });
+
+        canvas.addEventListener('touchstart', () => {
+            if (!game.gameOver) {
+                game.cyclone.x += game.windStrength;
+                game.cyclone.x = Math.min(game.cyclone.x, canvas.width - game.cyclone.radius);
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            game.cyclone.x = 600;
+            game.cyclone.y = 300;
+            game.score = 0;
+            game.gameOver = false;
+            restartBtn.style.display = 'none';
+        });
+
+        // Main game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            drawScene();
+            drawPeople();
+            game.particles.forEach(p => p.draw());
+            drawCyclone();
+            drawUI();
+            update();
+            requestAnimationFrame(gameLoop);
+        }
+        gameLoop();
+    </script>
+</body>
+</html>
