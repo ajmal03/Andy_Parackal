@@ -95,7 +95,7 @@ p {
 }
 
 ul li {
-  color: rgb(113 114 117 / 0%);
+  /* color: rgb(113 114 117 / 0%); */
   font-size: var(--p-font-size);
   font-weight: var(--font-weight-light);
 }
